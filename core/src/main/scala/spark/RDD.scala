@@ -25,6 +25,8 @@ import org.apache.hadoop.mapred.OutputFormat
 import org.apache.hadoop.mapred.SequenceFileOutputFormat
 import org.apache.hadoop.mapred.TextOutputFormat
 
+import org.apache.hadoop.mapreduce.lib.output.{TextOutputFormat => NewTextOutputFormat} 
+
 import it.unimi.dsi.fastutil.objects.{Object2LongOpenHashMap => OLMap}
 
 import spark.partial.BoundedDouble
@@ -478,7 +480,7 @@ abstract class RDD[T: ClassManifest](@transient sc: SparkContext) extends Serial
    */
   def saveAsTextFile(path: String) {
     this.map(x => (NullWritable.get(), new Text(x.toString)))
-      .saveAsHadoopFile[TextOutputFormat[NullWritable, Text]](path)
+      .saveAsNewAPIHadoopFile[NewTextOutputFormat[NullWritable, Text]](path)
   }
 
   /**

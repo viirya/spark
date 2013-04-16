@@ -19,6 +19,7 @@ object SparkPi {
       if (x*x + y*y < 1) 1 else 0
     }.reduce(_ + _)
     println("Pi is roughly " + 4.0 * count / n)
+    spark.makeRDD(List("Pi is roughly " + 4.0 * count / n), 1).saveAsTextFile("hdfs://localhost/tmp/pi")
     spark.stop()
   }
 }

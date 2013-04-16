@@ -519,6 +519,7 @@ class PairRDDFunctions[K: ClassManifest, V: ClassManifest](
       }
       writer.close(hadoopContext)
       committer.commitTask(hadoopContext)
+      committer.commitJob(hadoopContext)
       return 1
     }
     val jobFormat = outputFormatClass.newInstance

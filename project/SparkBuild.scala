@@ -9,7 +9,7 @@ import twirl.sbt.TwirlPlugin._
 
 object SparkBuild extends Build {
   // Hadoop version to build against. For the YARN branch, this needs to support YARN.
-  val HADOOP_VERSION = "2.0.1-alpha"
+  val HADOOP_VERSION = "2.0.3-alpha"
 
   lazy val root = Project("root", file("."), settings = rootSettings) aggregate(core, repl, examples, bagel)
 
