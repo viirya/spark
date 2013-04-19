@@ -480,7 +480,9 @@ abstract class RDD[T: ClassManifest](@transient sc: SparkContext) extends Serial
    */
   def saveAsTextFile(path: String) {
     this.map(x => (NullWritable.get(), new Text(x.toString)))
-      .saveAsNewAPIHadoopFile[NewTextOutputFormat[NullWritable, Text]](path)
+      .saveAsHadoopFile[TextOutputFormat[NullWritable, Text]](path)
+      //or call new API with:
+      //.saveAsNewAPIHadoopFile[NewTextOutputFormat[NullWritable, Text]](path)
   }
 
   /**

@@ -89,10 +89,12 @@ class HadoopWriter(@transient jobConf: JobConf) extends Logging with Serializabl
 
   def commit() {
     val taCtxt = getTaskContext()
+    val jobCtxt = getJobContext()
     val cmtr = getOutputCommitter() 
     if (cmtr.needsTaskCommit(taCtxt)) {
       try {
         cmtr.commitTask(taCtxt)
+	cmtr.commitJob(jobCtxt)
         logInfo (taID + ": Committed")
       } catch {
         case e: IOException => { 
