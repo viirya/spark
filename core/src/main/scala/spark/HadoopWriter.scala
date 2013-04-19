@@ -94,7 +94,7 @@ class HadoopWriter(@transient jobConf: JobConf) extends Logging with Serializabl
     if (cmtr.needsTaskCommit(taCtxt)) {
       try {
         cmtr.commitTask(taCtxt)
-	cmtr.commitJob(jobCtxt)
+	    cmtr.commitJob(jobCtxt)
         logInfo (taID + ": Committed")
       } catch {
         case e: IOException => { 
