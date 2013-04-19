@@ -4,9 +4,6 @@ import scala.math.random
 import spark._
 import SparkContext._
 
-import org.apache.hadoop.conf.Configuration
-
-
 object SparkPi {
   def main(args: Array[String]) {
     if (args.length == 0) {
@@ -22,8 +19,6 @@ object SparkPi {
       if (x*x + y*y < 1) 1 else 0
     }.reduce(_ + _)
     println("Pi is roughly " + 4.0 * count / n)
-    val namenode =  new Configuration().get("fs.default.name")
-    spark.makeRDD(List("Pi is roughly " + 4.0 * count / n), 1).saveAsTextFile(namenode + "/tmp/pi")
     spark.stop()
   }
 }
